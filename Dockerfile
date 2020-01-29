@@ -16,6 +16,9 @@ ENV HADOOP_HOME /opt/hadoop-$HADOOP_VERSION
 
 WORKDIR /opt
 
+# Remove jessie-backports debian package repository
+RUN sed -i '/deb http:\/\/ftp.debian.org\/debian jessie-backports main/d' /etc/apt/sources.list
+
 #Install Hive and PostgreSQL JDBC
 RUN apt-get update && apt-get install -y wget procps && \
 	wget https://archive.apache.org/dist/hive/hive-$HIVE_VERSION/apache-hive-$HIVE_VERSION-bin.tar.gz && \
